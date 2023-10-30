@@ -2,16 +2,18 @@ import { useState } from "react";
 import { FaCartPlus } from "react-icons/fa";
 import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
+import axios from "axios";
 
 export function Production() {
   const [currentPage, setCurrentPage] = useState(1);
 
   const getData = async () => {
-    const res = await fetch("https://fakestoreapi.com/products");
-    if (!res.ok) {
-      throw new Error("something wrong");
+    try {
+      const res = await axios.get("https://fakestoreapi.com/products");
+      return res.data;
+    } catch (error) {
+      throw new Error("something Wrong", error);
     }
-    return res.json();
   };
 
   const { data, isPending, error } = useQuery({
