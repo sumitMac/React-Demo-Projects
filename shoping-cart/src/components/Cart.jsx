@@ -124,7 +124,7 @@ export function Cart() {
                     </section>
                   );
                 })
-              : null}
+              : undefined}
           </ul>
         </section>
         <section className="total-price">
