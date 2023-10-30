@@ -4,7 +4,7 @@ import {App} from './App'
 import "./index.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import {Home} from './components/Home';
+import {Home,dataLoader} from './components/Home';
 import {About} from './components/About';
 import { Cart } from './components/Cart';
 
@@ -22,7 +22,7 @@ const router = createBrowserRouter([
     path: "/",
     element: <App />,
     children: [
-      { path: "", element: <Home /> },
+      { path: "", element: <Home />,loader:dataLoader },
       { path: "/about", element: <About /> },
       { path: "/cart", element: <Cart /> },
     ],

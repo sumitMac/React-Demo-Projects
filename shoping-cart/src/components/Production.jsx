@@ -1,37 +1,41 @@
 import { useState } from "react";
 import { FaCartPlus } from "react-icons/fa";
-import { useQuery } from "@tanstack/react-query";
+// import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
-import axios from "axios";
+// import axios from "axios";
+import { useLoaderData } from "react-router-dom";
 
 export function Production() {
   const [currentPage, setCurrentPage] = useState(1);
 
-  const getData = async () => {
-    try {
-      const res = await axios.get("https://fakestoreapi.com/products");
-      return res.data;
-    } catch (error) {
-      throw new Error("something Wrong", error);
-    }
-  };
 
-  const { data, isPending, error } = useQuery({
-    queryKey: ["products"],
-    queryFn: getData,
-  });
+  const data=useLoaderData();
 
-  if (isPending) {
-    return (
-      <section className="loading">
-        <img
-          src="https://media0.giphy.com/media/kUTME7ABmhYg5J3psM/giphy.gif?cid=ecf05e472st0k3v8z4waynrp54o5sm4bk4o4ua2yxmdls7xn&ep=v1_gifs_search&rid=giphy.gif&ct=g"
-          alt="loading-img"
-        />
-      </section>
-    );
-  }
-  if (error) return "An error has occurred: " + error.message;
+  // const getData = async () => {
+  //   try {
+  //     const res = await axios.get("https://fakestoreapi.com/products");
+  //     return res.data;
+  //   } catch (error) {
+  //     throw new Error("something Wrong", error);
+  //   }
+  // };
+
+  // const { data, isPending, error } = useQuery({
+  //   queryKey: ["products"],
+  //   queryFn: getData,
+  // });
+
+  // if (isPending) {
+  //   return (
+  //     <section className="loading">
+  //       <img
+  //         src="https://media0.giphy.com/media/kUTME7ABmhYg5J3psM/giphy.gif?cid=ecf05e472st0k3v8z4waynrp54o5sm4bk4o4ua2yxmdls7xn&ep=v1_gifs_search&rid=giphy.gif&ct=g"
+  //         alt="loading-img"
+  //       />
+  //     </section>
+  //   );
+  // }
+  // if (error) return "An error has occurred: " + error.message;
 
   const itemPerPage = 12;
   const itemOfLastIndex = currentPage * itemPerPage;
