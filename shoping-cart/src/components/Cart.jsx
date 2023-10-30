@@ -9,20 +9,21 @@ export function Cart() {
   useEffect(() => {
     const getData = async () => {
       const data = (await JSON.parse(localStorage.getItem("cart"))) || [];
-      setCart(data);
+      const cartWithQuantity = data.map((item) => ({ ...item, quantity: 1 }));
+      setCart(cartWithQuantity);
 
-      const totalPrice = calculatePrice(data);
+      const totalPrice = calculatePrice(cartWithQuantity);
       setTotalValue(totalPrice);
     };
     getData();
   }, []);
 
-  const calculatePrice = (item) => {
-    return item.reduce((total, item) => total + item.price, 0);
+  const calculatePrice = (items) => {
+    return items.reduce((total, item) => total + item.price * item.quantity, 0);
   };
 
   const handleRemoveItem = async (itemId) => {
-    const updateCart = await cart.filter((item) => item.id !== itemId);
+    const updateCart = cart.filter((item) => item.id !== itemId);
     localStorage.setItem("cart", JSON.stringify(updateCart));
 
     const newTotalValue = calculatePrice(updateCart);
@@ -63,6 +64,20 @@ export function Cart() {
         }
       });
   };
+
+  const handleQuantityChange = (itemId, newQuantity) => {
+    if (newQuantity === 0) {
+      handleRemoveItem(itemId);
+    } else {
+      const updatedCart = cart.map((item) =>
+        item.id === itemId ? { ...item, quantity: newQuantity } : item
+      );
+      setCart(updatedCart);
+      const newTotalValue = calculatePrice(updatedCart);
+      setTotalValue(newTotalValue);
+    }
+  };
+
   return (
     <section className="cart-body">
       <h2 className="cart-heading">
@@ -81,7 +96,24 @@ export function Cart() {
                         alt={item.title}
                       />
                       <h4 className="cart-heading">{item.title}</h4>
-                      <h1>{`${item.price} ₹`}</h1>
+                      <h1>{`${item.price * item.quantity} ₹`}</h1>
+                      <div className="quantity-controls">
+                        <button
+                          onClick={() =>
+                            handleQuantityChange(item.id, item.quantity - 1)
+                          }
+                        >
+                          -
+                        </button>
+                        <span>{item.quantity}</span>
+                        <button
+                          onClick={() =>
+                            handleQuantityChange(item.id, item.quantity + 1)
+                          }
+                        >
+                          +
+                        </button>
+                      </div>
                       <button
                         className="remove-btn"
                         onClick={() => handleRemoveItem(item.id)}

@@ -11,8 +11,21 @@ import img8 from "./images/img8.jpeg";
 import img9 from "./images/img9.jpeg";
 import img10 from "./images/img10.jpeg";
 import img11 from "./images/img11.jpeg";
-
 import { GrNext, GrPrevious } from "react-icons/gr";
+
+const imagesList = [
+  img1,
+  img2,
+  img3,
+  img4,
+  img5,
+  img6,
+  img7,
+  img8,
+  img9,
+  img10,
+  img11,
+];
 
 export function Container() {
   const [searchInput, setSearchInput] = useState("");
@@ -25,24 +38,14 @@ export function Container() {
       prevIndex === 0 ? imagesList.length - 1 : prevIndex - 1
     );
   };
-  const imagesList = [
-    img1,
-    img2,
-    img3,
-    img4,
-    img5,
-    img6,
-    img7,
-    img8,
-    img9,
-    img10,
-    img11,
-  ];
 
   return (
     <section className="main-container">
       <section className="images-container-main">
-        <button className="image-prev-btn" onClick={setTimeout(handlePrevImage, 5000)}>
+        <button
+          className="image-prev-btn"
+          onClick={handlePrevImage}
+        >
           <GrPrevious />
         </button>
         <img src={imagesList[currentImageIndex]} alt="" />

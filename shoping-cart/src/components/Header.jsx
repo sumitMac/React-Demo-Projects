@@ -6,7 +6,9 @@ export function Header() {
       <nav className="navbar">
         <section className="left-navbar">
           <Link to="/">
-            <h1 className="nav-heading" style={{color:"white"}}>Fashion World</h1>
+            <h1 className="nav-heading" style={{ color: "white" }}>
+              Fashion World
+            </h1>
           </Link>
         </section>
 
@@ -22,5 +24,3 @@ export function Header() {
     </section>
   );
 }
-
-
