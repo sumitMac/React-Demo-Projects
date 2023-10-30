@@ -4,9 +4,8 @@ import Swal from "sweetalert2";
 import { useLoaderData } from "react-router-dom";
 
 export function Production() {
-  
   const [currentPage, setCurrentPage] = useState(1);
-  const data=useLoaderData();
+  const data = useLoaderData();
   const itemPerPage = 12;
   const itemOfLastIndex = currentPage * itemPerPage;
   const itemOfFristIndex = itemOfLastIndex - itemPerPage;

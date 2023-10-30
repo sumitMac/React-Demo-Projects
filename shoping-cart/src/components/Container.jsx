@@ -42,10 +42,7 @@ export function Container() {
   return (
     <section className="main-container">
       <section className="images-container-main">
-        <button
-          className="image-prev-btn"
-          onClick={handlePrevImage}
-        >
+        <button className="image-prev-btn" onClick={handlePrevImage}>
           <GrPrevious />
         </button>
         <img src={imagesList[currentImageIndex]} alt="" />
