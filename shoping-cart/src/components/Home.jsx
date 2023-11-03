@@ -4,7 +4,7 @@ import axios from "axios";
 
 export function Home() {
   return (
-    <section className="home">
+    <section data-test="home" className="home">
       <Container />
       <Footer />
     </section>

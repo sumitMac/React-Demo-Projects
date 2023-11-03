@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export function Header() {
   return (
-    <section className="header-section">
+    <section data-test='header' className="header-section">
       <nav className="navbar">
         <section className="left-navbar">
           <Link to="/">
