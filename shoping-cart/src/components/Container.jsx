@@ -40,7 +40,7 @@ export function Container() {
   };
 
   return (
-    <section className="main-container">
+    <section data-test='main-container' className="main-container">
       <section className="images-container-main">
         <button className="image-prev-btn" onClick={handlePrevImage}>
           <GrPrevious />
